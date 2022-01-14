@@ -23,7 +23,15 @@ function checksExistsUserAccount(request, response, next) {
 }
 
 function checksCreateTodosUserAvailability(request, response, next) {
+const {user}= request;
 
+if(user.pro == false){
+  return next();
+} else if(user.todo.lenght < 10){
+  return next();
+}else if(!user.pro && user.todos.length >= 10){
+  return response.status(403).json({error:"users has more than 10 todos"})
+}
 }
 
 function checksTodoExists(request, response, next) {
