@@ -15,7 +15,7 @@ function checksExistsUserAccount(request, response, next) {
   const user = users.find(user=>user.username===username);
   
   if(!users){
-    return response.status(400).json({error:"users not found"})
+    return response.status(404).json({error:"users not found"})
   }
   request.user=user;
   
@@ -29,17 +29,53 @@ if(user.pro == false){
   return next();
 } else if(user.todo.lenght < 10){
   return next();
-}else if(!user.pro && user.todos.length >= 10){
+}else if(!user.pro && user.todos.length > 10){
   return response.status(403).json({error:"users has more than 10 todos"})
 }
+
+
 }
 
 function checksTodoExists(request, response, next) {
-  // Complete aqui
+/* const {username}=request.headers;
+ const {id}=request.params;
+ const {todos}=request.body;
+
+ const user = users.find((user)=>user.username===username);
+ const todos = user.todos.find((todos) => todos.id === id); 
+ const id = user.id.find((id)=>id.uuidv4===id.uuidv4)
+
+ if(!user){
+    return response.status(400).json({error:"users not found"})
+  }
+   if(!todos){
+    return response.status(400).json({error:"todo not exists"})
+  }
+if(!id === validate(uuidv4) && id === user.id){
+return response.status(404).json({error:"id and user invalid!"})
+}
+request.todos=todos;
+request.user=user;
+request.id=id;
+
+return next();*/
+
 }
 
 function findUserById(request, response, next) {
-  // Complete aqui
+  const {id}=request.params;
+
+  const user= users.find((user)=>user.id===id)
+
+  if(!user){
+    return response.status(404).json({error:"id and user invalid!"})
+  }
+
+  request.user=user;
+
+  return next(); 
+
+
 }
 
 app.post('/users', (request, response) => {
