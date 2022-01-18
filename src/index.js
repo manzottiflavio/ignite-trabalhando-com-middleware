@@ -37,28 +37,26 @@ if(user.pro == false){
 }
 
 function checksTodoExists(request, response, next) {
-/* const {username}=request.headers;
+ const {username}=request.headers;
  const {id}=request.params;
- const {todos}=request.body;
 
  const user = users.find((user)=>user.username===username);
- const todos = user.todos.find((todos) => todos.id === id); 
- const id = user.id.find((id)=>id.uuidv4===id.uuidv4)
+ //const todo = todos.find((todo) => todo.id === id); 
 
  if(!user){
-    return response.status(400).json({error:"users not found"})
+    return response.status(404).json({error:"users not found"})
+  }else
+   if(!todo){
+    return response.status(404).json({error:"todo not exists"})
+  }else
+  if (!validate(id)) {
+    return response.status(400).json({ error: "id must be UUID" });
   }
-   if(!todos){
-    return response.status(400).json({error:"todo not exists"})
-  }
-if(!id === validate(uuidv4) && id === user.id){
-return response.status(404).json({error:"id and user invalid!"})
-}
-request.todos=todos;
+request.todo=todo;
 request.user=user;
-request.id=id;
 
-return next();*/
+
+return next();
 
 }
 
