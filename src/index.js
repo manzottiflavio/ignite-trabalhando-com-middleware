@@ -27,9 +27,11 @@ const {user}= request;
 
 if(user.pro == false){
   return next();
-} else if(user.todo.lenght < 10){
+} else 
+if(user.todo.lenght < 10){
   return next();
-}else if(!user.pro && user.todos.length > 10){
+}else 
+if(!user.pro && user.todos.length > 10){
   return response.status(403).json({error:"users has more than 10 todos"})
 }
 
@@ -41,7 +43,7 @@ function checksTodoExists(request, response, next) {
  const {id}=request.params;
 
  const user = users.find((user)=>user.username===username);
- //const todo = todos.find((todo) => todo.id === id); 
+ const todo = user.todos.find((todo) => todo.id === id); 
 
  if(!user){
     return response.status(404).json({error:"users not found"})
